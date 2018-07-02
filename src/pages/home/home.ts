@@ -9,10 +9,11 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class HomePage {
 
-  imageURI:any;
+  imageBase64:any;
   imageFileName:any;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     private transfer: FileTransfer,
     private camera: Camera,
     public loadingCtrl: LoadingController,
@@ -21,12 +22,11 @@ export class HomePage {
   getImage() {
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.CAMERA
     }
-  
     this.camera.getPicture(options).then((imageData) => {
-      this.imageURI = imageData;
+      this.imageBase64 = imageData;
     }, (err) => {
       console.log(err);
       this.presentToast(err);
@@ -48,7 +48,7 @@ export class HomePage {
       headers: {}
     }
   
-    fileTransfer.upload(this.imageURI, 'http://192.168.0.7:8080/api/uploadImage', options)
+    fileTransfer.upload(this.imageBase64, 'http://192.168.0.7:8080/api/uploadImage', options)
       .then((data) => {
       console.log(data+" Uploaded Successfully");
       this.imageFileName = "http://192.168.0.7:8080/static/images/ionicfile.jpg"
