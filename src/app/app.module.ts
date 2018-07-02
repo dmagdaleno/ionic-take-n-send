@@ -10,6 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
+import { PictureServiceProvider } from '../providers/picture-service/picture-service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { Camera } from '@ionic-native/camera';
     FileTransfer,
     FileTransferObject,
     File,
-    Camera
+    Camera,
+    PictureServiceProvider
   ]
 })
 export class AppModule {}
