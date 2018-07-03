@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { DomSanitizer, SafeHtml, SafeStyle } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { Mock } from '../../app/model/mock'
+import { Picture } from '../../app/model/picture';
 
 @Component({
   selector: 'page-home',
@@ -14,18 +15,22 @@ export class HomePage {
   imageView: SafeHtml;
   imageReady: Boolean = false;
 
-  name: string = '';
-  documentType: string = '';
-  document: string = '';
-  gender: string = '';
-  imageBase64: string = '';
+  picture: Picture;
 
   constructor(
     public navCtrl: NavController,
     private camera: Camera,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer) {
+
+      this.picture = {
+        base64: '',
+        name: '',
+        documentType: '',
+        document: ''
+      }
+  }
 
   getImage() {
     const options: CameraOptions = {
@@ -35,13 +40,14 @@ export class HomePage {
       sourceType: this.camera.PictureSourceType.CAMERA
     }
     this.camera.getPicture(options).then((imageData) => {
-      this.imageBase64 = imageData;
+      this.picture.base64 = imageData;
       this.imageView = this.sanitizer
         .bypassSecurityTrustResourceUrl('data:image/png;base64,' + imageData);
       this.imageReady = true;
     }, (err) => {
       console.log(err);
       var mock: Mock = new Mock();
+      this.picture.base64 = mock.base64;
       this.imageView = this.sanitizer
         .bypassSecurityTrustResourceUrl(mock.base64);
       this.imageReady = true;
@@ -49,6 +55,9 @@ export class HomePage {
   }
 
   avancar(){
-    console.log('clicou em avançar');
+    console.log('picture.base64: ' + this.picture.base64.substr(0,30).concat('...'));
+    console.log('picture.name: ' + this.picture.name);
+    console.log('picture.documentType: ' + this.picture.documentType);
+    console.log('picture.document: ' + this.picture.document);
   }
 }
