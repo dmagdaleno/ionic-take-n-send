@@ -2,5 +2,6 @@ export interface Picture {
     base64: string,
     name: string,
     documentType: string,
-    document: string
+    document: string,
+    birthDate: string
 }
