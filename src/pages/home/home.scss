@@ -6,15 +6,12 @@ page-home {
         display:flex;
         justify-content:center;
         align-items:center;
+        overflow: hidden;
     }
     
     .custom-icon {
         font-size: 500%;
         color : gray;
         margin: auto;
-    }
-
-    .picture {
-        background-size: cover;
     }
 }
