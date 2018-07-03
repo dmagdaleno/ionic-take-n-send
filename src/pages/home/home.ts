@@ -28,7 +28,8 @@ export class HomePage {
         base64: '',
         name: '',
         documentType: '',
-        document: ''
+        document: '',
+        birthDate: ''
       }
   }
 
@@ -59,5 +60,6 @@ export class HomePage {
     console.log('picture.name: ' + this.picture.name);
     console.log('picture.documentType: ' + this.picture.documentType);
     console.log('picture.document: ' + this.picture.document);
+    console.log('picture.birthDate: ' + this.picture.birthDate);
   }
 }

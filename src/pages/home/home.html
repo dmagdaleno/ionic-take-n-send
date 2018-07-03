@@ -29,6 +29,11 @@
       <ion-label stacked>Documento</ion-label>
       <ion-input [(ngModel)]="picture.document" name="picture.document"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label stacked>Data de nascimento</ion-label>
+      <ion-datetime [(ngModel)]="picture.birthDate" name="picture.birthDate" displayFormat="DD/MM/YYYY">
+      </ion-datetime>
+    </ion-item>
   </form>
 
   <ion-fab bottom right (click)="avancar()">
