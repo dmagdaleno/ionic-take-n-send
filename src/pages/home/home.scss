@@ -1,3 +1,20 @@
 page-home {
+    .picture-container {
+        height: 40%;
+        width: 100%;
+        background-color: lightgray;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+    
+    .custom-icon {
+        font-size: 500%;
+        color : gray;
+        margin: auto;
+    }
 
+    .picture {
+        background-size: cover;
+    }
 }

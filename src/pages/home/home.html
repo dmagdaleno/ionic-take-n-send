@@ -1,21 +1,47 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Picture View
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-item>
-    <p>{{imageURI}}</p>
-    <button ion-button color="secondary" (click)="getImage()">Get Image</button>
-  </ion-item>
-  <ion-item>
-    <h4>Image Preview</h4>
-    <img src="{{imageFileName}}" *ngIf="imageFileName" alt="Ionic File" width="300" />
-  </ion-item>
-  <ion-item>
-    <button ion-button (click)="uploadFile()">Upload</button>
-  </ion-item>
+<ion-content>
+  <div text-center class="picture-container" (click)="getImage()">
+    <ion-icon *ngIf="!imageReady" name="camera" class="custom-icon"></ion-icon>
+    <img *ngIf="imageReady" [src]="imageView" alt="Foto do usuário" class="picture" />
+  </div>
+
+  <form (ngSubmit)="agendar()" #formulario="ngForm" class="form">
+    <ion-item>
+      <ion-label stacked>Nome</ion-label>
+      <ion-input [(ngModel)]="name" name="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Tipo do documento</ion-label>
+      <ion-select [(ngModel)]="documentType" name="documentType" interface="popover">
+        <ion-option value="cpf">CPF</ion-option>
+        <ion-option value="cnh">CNH</ion-option>
+        <ion-option value="rg">RG</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Documento</ion-label>
+      <ion-input [(ngModel)]="document" name="document"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Gênero</ion-label>
+      <ion-select [(ngModel)]="gender" name="gender" interface="popover">
+        <ion-option value="f">Feminino</ion-option>
+        <ion-option value="m">Masculino</ion-option>
+      </ion-select>
+    </ion-item>
+  </form>
+
+  <ion-fab bottom right (click)="avancar()">
+    <button ion-fab>
+      <ion-icon name="send"></ion-icon>
+    </button>
+  </ion-fab>
+  
 </ion-content>
