@@ -15,11 +15,11 @@
   <form (ngSubmit)="agendar()" #formulario="ngForm" class="form">
     <ion-item>
       <ion-label stacked>Nome</ion-label>
-      <ion-input [(ngModel)]="name" name="name"></ion-input>
+      <ion-input [(ngModel)]="picture.name" name="name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Tipo do documento</ion-label>
-      <ion-select [(ngModel)]="documentType" name="documentType" interface="popover">
+      <ion-select [(ngModel)]="picture.documentType" name="picture.documentType" interface="popover">
         <ion-option value="cpf">CPF</ion-option>
         <ion-option value="cnh">CNH</ion-option>
         <ion-option value="rg">RG</ion-option>
@@ -27,14 +27,7 @@
     </ion-item>
     <ion-item>
       <ion-label stacked>Documento</ion-label>
-      <ion-input [(ngModel)]="document" name="document"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label stacked>Gênero</ion-label>
-      <ion-select [(ngModel)]="gender" name="gender" interface="popover">
-        <ion-option value="f">Feminino</ion-option>
-        <ion-option value="m">Masculino</ion-option>
-      </ion-select>
+      <ion-input [(ngModel)]="picture.document" name="picture.document"></ion-input>
     </ion-item>
   </form>
 
