@@ -10,6 +10,10 @@ import { HomePage } from '../pages/home/home';
 import { Camera } from '@ionic-native/camera';
 import { PictureServiceProvider } from '../providers/picture-service/picture-service';
 
+import 'rxjs/add/observable/of'
+import 'rxjs/add/operator/catch'
+import 'rxjs/add/operator/do'
+
 @NgModule({
   declarations: [
     MyApp,

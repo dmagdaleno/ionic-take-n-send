@@ -3,5 +3,6 @@ export interface Picture {
     name: string,
     documentType: string,
     document: string,
-    birthDate: string
+    birthDate: string,
+    sent: boolean
 }
