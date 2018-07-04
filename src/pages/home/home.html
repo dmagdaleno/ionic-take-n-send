@@ -6,7 +6,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <div text-center class="picture-container" (click)="getImage()">
     <ion-icon *ngIf="!imageReady" name="camera" class="custom-icon"></ion-icon>
     <img *ngIf="imageReady" [src]="imageView" alt="Foto do usuário" class="picture" />
