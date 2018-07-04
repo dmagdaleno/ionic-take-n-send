@@ -55,7 +55,7 @@ export class HomePage {
     });
   }
 
-  avancar(){
+  send(){
     console.log('picture.base64: ' + this.picture.base64.substr(0,30).concat('...'));
     console.log('picture.name: ' + this.picture.name);
     console.log('picture.documentType: ' + this.picture.documentType);
