@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController, Loading } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
@@ -64,6 +64,10 @@ export class HomePage {
       }).present();
       return;
     }
+
+    let loading:Loading = this.startLoading();
+
+
     
   }
 
@@ -76,5 +80,15 @@ export class HomePage {
           return true;
     }
     return false;
+  }
+
+  private startLoading(): Loading{
+    let loading:Loading = this._loadingCtrl.create({
+      content: 'Enviando foto...'
+    });
+
+    loading.present();
+
+    return loading;
   }
 }
