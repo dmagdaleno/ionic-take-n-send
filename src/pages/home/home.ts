@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, AlertController, Loading } from 'ionic-angular';
+import { NavController, LoadingController, AlertController, Loading, Alert } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { Mock } from '../../app/model/mock'
 import { Picture } from '../../app/model/picture';
+import { PictureServiceProvider } from '../../providers/picture-service/picture-service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'page-home',
@@ -20,6 +22,7 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     private camera: Camera,
+    private pictureService: PictureServiceProvider,
     private _loadingCtrl: LoadingController,
     private _alertCtrl: AlertController,
     private _sanitizer: DomSanitizer) {
@@ -29,7 +32,8 @@ export class HomePage {
         name: '',
         documentType: '',
         document: '',
-        birthDate: ''
+        birthDate: '',
+        sent: false
       }
   }
 
@@ -65,9 +69,30 @@ export class HomePage {
       return;
     }
 
-    let loading:Loading = this.startLoading();
+    let loading: Loading = this.startLoading();
 
+    let alert: Alert = this.buildAlert();
+    let title: string = '';
+    let message: string = '';
 
+    this.pictureService.send(this.picture)
+      .finally(() => {
+        alert.setTitle(title);
+        alert.setSubTitle(message);
+        alert.present();
+      })  
+      .subscribe(success => {
+        console.log(success);
+        loading.dismiss();
+        title = 'SUCESSO';
+        message = 'Foto enviada com sucesso!';
+      }, 
+      (error: HttpErrorResponse) => {
+        console.log(error);
+        loading.dismiss();
+        title = 'ERRO';
+        message = 'Não foi possível enviar a foto';
+      });
     
   }
 
@@ -90,5 +115,11 @@ export class HomePage {
     loading.present();
 
     return loading;
+  }
+
+  buildAlert(): Alert {
+    return this._alertCtrl.create({
+      buttons: [{text: 'Ok'}]
+    });
   }
 }
