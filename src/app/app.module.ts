@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -13,6 +14,7 @@ import { PictureServiceProvider } from '../providers/picture-service/picture-ser
 import 'rxjs/add/observable/of'
 import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/do'
+import 'rxjs/add/operator/finally'
 
 @NgModule({
   declarations: [
@@ -21,7 +23,12 @@ import 'rxjs/add/operator/do'
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      scrollPadding: false,
+      scrollAssist: true,
+      autoFocusAssist: false
+    }),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
