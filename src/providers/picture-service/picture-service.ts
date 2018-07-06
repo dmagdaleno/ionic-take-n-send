@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Picture } from '../../app/model/picture';
 import { Observable } from 'rxjs/Observable';
@@ -13,22 +13,7 @@ export class PictureServiceProvider {
   }
 
   send(picture: Picture): Observable<any> {
-    let body: RequestWrapper = this.buildRequestBody(picture);
-    return this._http
-      .post<any>(this.apiUrl.concat('/send'), body)
-        .do(() => picture.sent = true)
-  }
-
-  buildRequestBody(picture: Picture): RequestWrapper {
-    return {
-      service: 'ENROLL', 
-      document: picture.document,
-      docType: picture.documentType,
-      image: picture.base64,
-      contract: '12345ABC',
-      product: 'QUERYONESKYO',
-      gallery: 'whitelist'
-    };
+    return Observable.of(picture);
   }
 
 }
